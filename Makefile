@@ -239,3 +239,11 @@ docs:
 
 api_info:
 	@go run private/model/cli/api-info/api-info.go
+
+##################
+# Customizations #
+##################
+
+appmesh-preview:
+	cp -R models/apis/appmesh models/apis/appmeshpreview
+	curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/service-model.json | jq -M 'walk(if type == "object" then del(.documentation) else . end)' > models/apis/appmeshpreview/2019-01-25/api-2.json
