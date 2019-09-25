@@ -1093,6 +1093,21 @@
         }
       }
     },
+    "ListenerTls": {
+      "type": "structure",
+      "required": [
+        "certificate",
+        "mode"
+      ],
+      "members": {
+        "certificate": {
+          "shape": "ListenerTlsCertificate"
+        },
+        "mode": {
+          "shape": "ListenerTlsMode"
+        }
+      }
+    },
     "DeleteMeshInput": {
       "type": "structure",
       "required": [
@@ -1515,6 +1530,14 @@
       "min": 0,
       "max": 100
     },
+    "ListenerTlsMode": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "PERMISSIVE",
+        "STRICT"
+      ]
+    },
     "TagValue": {
       "type": "string",
       "min": 0,
@@ -1921,7 +1944,7 @@
     },
     "UntagResourceOutput": {
       "type": "structure",
-      "members": { }
+      "members": {}
     },
     "AwsCloudMapInstanceAttribute": {
       "type": "structure",
@@ -2247,6 +2270,14 @@
       },
       "min": 1,
       "max": 25
+    },
+    "ListenerTlsCertificate": {
+      "type": "structure",
+      "members": {
+        "acm": {
+          "shape": "ListenerTlsAcmCertificate"
+        }
+      }
     },
     "ListVirtualNodesLimit": {
       "type": "integer",
@@ -2624,6 +2655,12 @@
         },
         "portMapping": {
           "shape": "PortMapping"
+        },
+        "tls": {
+          "shape": "ListenerTls",
+          "tags": [
+            "preview"
+          ]
         }
       }
     },
@@ -2783,7 +2820,7 @@
     },
     "TagResourceOutput": {
       "type": "structure",
-      "members": { }
+      "members": {}
     },
     "RouteList": {
       "type": "list",
@@ -3100,7 +3137,10 @@
           "shape": "HttpRouteMatch"
         },
         "retryPolicy": {
-          "shape": "HttpRetryPolicy"
+          "shape": "HttpRetryPolicy",
+          "tags": [
+            "preview"
+          ]
         }
       }
     },
@@ -3251,6 +3291,17 @@
       "box": true,
       "min": 1,
       "max": 50
+    },
+    "ListenerTlsAcmCertificate": {
+      "type": "structure",
+      "required": [
+        "certificateArn"
+      ],
+      "members": {
+        "certificateArn": {
+          "shape": "Arn"
+        }
+      }
     },
     "TagKey": {
       "type": "string",

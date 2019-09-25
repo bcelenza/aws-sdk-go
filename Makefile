@@ -244,6 +244,9 @@ api_info:
 # Customizations #
 ##################
 
+appmesh:
+	curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/service-model.json | sed 's:appmesh-preview:appmesh:g' | sed 's:App Mesh Preview:App Mesh:g' | jq -M 'walk(if type == "object" then del(.documentation) else . end)' > models/apis/appmesh/2019-01-25/api-2.json
+
 appmesh-preview:
 	cp -R models/apis/appmesh models/apis/appmeshpreview
 	curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/service-model.json | jq -M 'walk(if type == "object" then del(.documentation) else . end)' > models/apis/appmeshpreview/2019-01-25/api-2.json
